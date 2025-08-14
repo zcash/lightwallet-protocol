@@ -7,11 +7,34 @@ and this library adheres to Rust's notion of
 
 ## Unreleased
 
+### Added
+- `compact_formats.CompactTxIn`
+- `compact_formats.TxOut`
+- `service.PoolType`
+
+### Changed
+- The `compact_formats.CompactTx` type has added fields `vin` and `vout`,
+  which may be used to represent transparent transaction input and output data.
+- The `service.BlockRange` type has an added `poolTypes` field, which allows
+  the caller of service methods that take this type as input to cause returned
+  data to be filtered to include information only for the specified protocols.
+  For backwards compatibility, when this field is set the default (empty) value,
+  servers should return Sapling and Orchard data. This field is to be ignored
+  when the type is used as part of a `service.TransparentAddressBlockFilter`.
+- The `hash` field of `compact_formats.CompactTx` has been renamed to `txid`.
+  This is a serialization-compatible clarification, as the index of this field
+  in the .proto type does not change.
+
+### Deprecated
+- `service.CompactTxStreamer`:
+    - The `GetBlockNullifiers` and `GetBlockRangeNullifiers` methods are
+      deprecated.
+
 ## [v0.3.6] - 2025-05-20
 
 ### Added
 - `service.LightdInfo` has added field `donationAddress`
-- `service.CompactTxStreamer.GetTaddressTransactions`. This duplicates 
+- `service.CompactTxStreamer.GetTaddressTransactions`. This duplicates
   the `GetTaddressTxids` method, but is more accurately named.
 
 ### Deprecated

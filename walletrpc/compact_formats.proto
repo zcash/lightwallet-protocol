@@ -62,7 +62,7 @@ message CompactTx {
 // CompactSaplingSpend is a Sapling Spend Description as described in 7.3 of the Zcash
 // protocol specification.
 message CompactSaplingSpend {
-    bytes nf = 1;   // nullifier (see the Zcash protocol specification)
+    bytes nf = 1;   // Nullifier (see the Zcash protocol specification)
 }
 
 // A compact representation of a [Sapling Output](https://zips.z.cash/protocol/protocol.pdf#outputencodingandconsensus).
@@ -70,9 +70,9 @@ message CompactSaplingSpend {
 // It encodes the `cmu` field, `ephemeralKey` field, and a 52-byte prefix of the
 // `encCiphertext` field of a Sapling Output Description. Total size is 116 bytes.
 message CompactSaplingOutput {
-    bytes cmu = 1;          // note commitment u-coordinate
-    bytes ephemeralKey = 2; // ephemeral public key
-    bytes ciphertext = 3;   // first 52 bytes of ciphertext
+    bytes cmu = 1;          // Note commitment u-coordinate.
+    bytes ephemeralKey = 2; // Ephemeral public key.
+    bytes ciphertext = 3;   // First 52 bytes of ciphertext.
 }
 
 // A compact representation of an [Orchard Action](https://zips.z.cash/protocol/protocol.pdf#actionencodingandconsensus).

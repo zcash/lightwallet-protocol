@@ -195,8 +195,9 @@ service CompactTxStreamer {
     // Submit the given transaction to the Zcash network
     rpc SendTransaction(RawTransaction) returns (SendResponse) {}
 
-    // Return the transactions corresponding to the given t-address within the given block range
-    // NB - this method is misnamed, it returns transactions, not transaction IDs.
+    // Return RawTransactions that match the given transparent address filter.
+    //
+    // Note: This function is misnamed, it returns complete `RawTransaction` values, not TxIds.
     // NOTE: this method is deprecated, please use GetTaddressTransactions instead.
     rpc GetTaddressTxids(TransparentAddressBlockFilter) returns (stream RawTransaction) {}
 

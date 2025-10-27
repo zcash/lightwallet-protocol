@@ -7,7 +7,8 @@ package cash.z.wallet.sdk.rpc;
 option go_package = "lightwalletd/walletrpc";
 option swift_prefix = "";
 
-// REMINDER: proto3 fields are all optional. A field that is not present will be set to its zero value.
+// REMINDER: proto3 fields are all optional. A field that is not present will be set to its zero/false/empty
+// value.
 
 // Information about the state of the chain as of a given block.
 message ChainMetadata {
@@ -40,10 +41,11 @@ message CompactBlock {
 message CompactTx {
     // The index of the transaction within the block.
     uint64 index = 1;
-    // The id of the transaction. This byte array must be in protocol order and
-    // MUST NOT be reversed or hex-encoded; the byte-reversed and hex-encoded
-    // representation is exclusively a textual representation of a txid and
-    // should not be used here.
+    // The id of the transaction as defined in
+    // [§ 7.1.1 ‘Transaction Identifiers’](https://zips.z.cash/protocol/protocol.pdf#txnidentifiers)
+    // This byte array MUST be in protocol order and MUST NOT be reversed
+    // or hex-encoded; the byte-reversed and hex-encoded representation is
+    // exclusively a textual representation of a txid.
     bytes txid = 2;
 
     // The transaction fee: present if server can provide. In the case of a

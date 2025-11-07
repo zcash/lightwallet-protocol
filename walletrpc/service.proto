@@ -211,9 +211,10 @@ service CompactTxStreamer {
     // `PoolType::TRANSPARENT` member of the `poolTypes` argument.
     rpc GetBlockNullifiers(BlockID) returns (CompactBlock) {}
 
-    // Return a list of consecutive compact blocks. If the first range specification
-    // is greater than the second, blocks are returned in reverse order
-    // (highest height to lowest height)
+    // Return a list of consecutive compact blocks in the specified range.
+    //
+    // If range.start <= range.end, blocks are returned increasing height order; 
+    // otherwise blocks are returned in decreasing height order.
     rpc GetBlockRange(BlockRange) returns (stream CompactBlock) {}
 
     // Same as GetBlockRange except the returned CompactBlock values contain

@@ -28,7 +28,7 @@ message CompactBlock {
     bytes hash = 3;                  // the ID (hash) of this block, same as in block explorers
     bytes prevHash = 4;              // the ID (hash) of this block's predecessor
     uint32 time = 5;                 // Unix epoch time when the block was mined
-    bytes header = 6;                // (hash, prevHash, and time) OR (full header)
+    bytes header = 6;                // full header (as returned by the getblock RPC)
     repeated CompactTx vtx = 7;      // zero or more compact transactions from this block
     ChainMetadata chainMetadata = 8; // information about the state of the chain as of this block
 }
@@ -41,6 +41,7 @@ message CompactBlock {
 message CompactTx {
     // The index of the transaction within the block.
     uint64 index = 1;
+
     // The id of the transaction as defined in
     // [§ 7.1.1 ‘Transaction Identifiers’](https://zips.z.cash/protocol/protocol.pdf#txnidentifiers)
     // This byte array MUST be in protocol order and MUST NOT be reversed
@@ -58,6 +59,7 @@ message CompactTx {
     repeated CompactSaplingSpend spends = 4;
     repeated CompactSaplingOutput outputs = 5;
     repeated CompactOrchardAction actions = 6;
+
     // `CompactTxIn` values corresponding to the `vin` entries of the full transaction.
     //
     // Note: the single null-outpoint input for coinbase transactions is omitted. Light
@@ -74,6 +76,7 @@ message CompactTxIn {
     // byte array must be in protocol order and MUST NOT be reversed or
     // hex-encoded.
     bytes prevoutTxid = 1;
+
     // The index of the output being spent in the `vout` array of the
     // transaction referred to by `prevoutTxid`.
     uint32 prevoutIndex = 2;
@@ -86,6 +89,7 @@ message CompactTxIn {
 message TxOut {
     // The value of the output, in Zatoshis.
     uint64 value = 1;
+
     // The script pubkey that must be satisfied in order to spend this output.
     bytes scriptPubKey = 2;
 }

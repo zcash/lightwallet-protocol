@@ -200,16 +200,23 @@ message GetAddressUtxosReplyList {
 service CompactTxStreamer {
     // Return the BlockID of the block at the tip of the best chain
     rpc GetLatestBlock(ChainSpec) returns (BlockID) {}
+
     // Return the compact block corresponding to the given block identifier
     rpc GetBlock(BlockID) returns (CompactBlock) {}
+
     // Same as GetBlock except the returned CompactBlock value contains only
     // nullifiers.
     //
     // Note: this method is deprecated. Implementations should ignore any
     // `PoolType::TRANSPARENT` member of the `poolTypes` argument.
     rpc GetBlockNullifiers(BlockID) returns (CompactBlock) {}
-    // Return a list of consecutive compact blocks
+
+    // Return a list of consecutive compact blocks in the specified range.
+    //
+    // If range.start <= range.end, blocks are returned increasing height order; 
+    // otherwise blocks are returned in decreasing height order.
     rpc GetBlockRange(BlockRange) returns (stream CompactBlock) {}
+
     // Same as GetBlockRange except the returned CompactBlock values contain
     // only nullifiers.
     //
@@ -219,6 +226,7 @@ service CompactTxStreamer {
 
     // Return the requested full (not compact) transaction (as from zcashd)
     rpc GetTransaction(TxFilter) returns (RawTransaction) {}
+
     // Submit the given transaction to the Zcash network
     rpc SendTransaction(RawTransaction) returns (SendResponse) {}
 
@@ -268,6 +276,7 @@ service CompactTxStreamer {
 
     // Return information about this lightwalletd instance and the blockchain
     rpc GetLightdInfo(Empty) returns (LightdInfo) {}
+
     // Testing-only, requires lightwalletd --ping-very-insecure (do not enable in production)
     rpc Ping(Duration) returns (PingResponse) {}
 }

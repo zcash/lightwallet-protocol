@@ -89,7 +89,7 @@ message CompactTxIn {
 // A transparent output being created by the transaction.
 //
 // This contains identical data to the `TxOut` type in the transaction itself, and
-// thus it is not "compact."
+// thus it is not "compact".
 message TxOut {
     // The value of the output, in Zatoshis.
     uint64 value = 1;

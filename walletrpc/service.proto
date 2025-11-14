@@ -107,6 +107,8 @@ message LightdInfo {
     string zcashdBuild = 13;            // example: "v4.1.1-877212414"
     string zcashdSubversion = 14;       // example: "/MagicBean:4.1.1/"
     string donationAddress = 15;        // Zcash donation UA address
+    string upgradeName = 16;            // name of next pending network upgrade, empty if none scheduled
+    uint64 upgradeHeight = 17;          // height of next pending upgrade, zero if none is scheduled
 }
 
 // TransparentAddressBlockFilter restricts the results of the GRPC methods that

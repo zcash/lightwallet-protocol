@@ -11,6 +11,8 @@ and this library adheres to Rust's notion of
 - `compact_formats.CompactTxIn`
 - `compact_formats.TxOut`
 - `service.PoolType`
+- `lightdinfo.upgradeName`
+- `lightdinfo.upgradeHeight`
 
 ### Changed
 - The `compact_formats.CompactTx` type has added fields `vin` and `vout`,
@@ -24,6 +26,8 @@ and this library adheres to Rust's notion of
 - The `hash` field of `compact_formats.CompactTx` has been renamed to `txid`.
   This is a serialization-compatible clarification, as the index of this field
   in the .proto type does not change.
+- The `GetLightdInfo` RPC is modified to return the name and height of the
+  next pending protocol upgrade, if there is one.
 
 ### Deprecated
 - `service.CompactTxStreamer`:

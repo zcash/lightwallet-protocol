@@ -114,7 +114,7 @@ message LightdInfo {
 // TransparentAddressBlockFilter restricts the results of the GRPC methods that
 // use it to the transactions that involve the given address and were mined in
 // the specified block range. Non-default values for both the address and the
-// block range must be specified.
+// block range must be specified. Mempool transactions are not included.
 //
 // The `poolTypes` field of the `range` argument should be ignored.
 // Implementations MAY consider it an error if any pool types are specified.
@@ -239,7 +239,8 @@ service CompactTxStreamer {
     // NOTE: this method is deprecated, please use GetTaddressTransactions instead.
     rpc GetTaddressTxids(TransparentAddressBlockFilter) returns (stream RawTransaction) {}
 
-    // Return the transactions corresponding to the given t-address within the given block range
+    // Return the transactions corresponding to the given t-address within the given block range.
+    // Mempool transactions are not included in the results.
     rpc GetTaddressTransactions(TransparentAddressBlockFilter) returns (stream RawTransaction) {}
 
     rpc GetTaddressBalance(AddressList) returns (Balance) {}

@@ -28,6 +28,9 @@ and this library adheres to Rust's notion of
   in the .proto type does not change.
 - The `GetLightdInfo` RPC is modified to return the name and height of the
   next pending protocol upgrade, if there is one.
+- `service.Exclude` has been renamed to `service.GetMempoolTxRequest` and has
+  an added `poolTypes` field, which allows the caller of this method to specify
+  which pools the resulting `CompactTx` values should contain data for.
 
 ### Deprecated
 - `service.CompactTxStreamer`:

@@ -148,7 +148,7 @@ message Balance {
     int64 valueZat = 1;
 }
 
-// A request
+// Request parameters for the `GetMempoolTx` RPC.
 message GetMempoolTxRequest {
     // A list of transaction ID byte string suffixes that should be excluded
     // from the response. These suffixes may be produced either directly from
@@ -259,18 +259,18 @@ service CompactTxStreamer {
     rpc GetTaddressBalance(AddressList) returns (Balance) {}
     rpc GetTaddressBalanceStream(stream Address) returns (Balance) {}
 
-    // Returns the compact transaction representation for transactions
-    // currently in the mempool. The the results of this operation may be a few
+    // Returns a stream of the compact transaction representation for transactions
+    // currently in the mempool. The results of this operation may be a few
     // seconds out of date. If the `exclude_txid_suffixes` list is empty,
     // return all transactions; otherwise return all *except* those in the
     // `exclude_txid_suffixes` list (if any); this allows the client to avoid
     // receiving transactions that it already has (from an earlier call to this
-    // rpc). The transaction IDs in the `exclude_txid_suffixes` list can be
+    // RPC). The transaction IDs in the `exclude_txid_suffixes` list can be
     // shortened to any number of bytes to make the request more
     // bandwidth-efficient; if two or more transactions in the mempool match a
     // txid suffix, none of the matching transactions are excluded. Txid
-    // suffixs in the exclude list that don't match any transactions in the
-    // mempool the mempool are ignored.
+    // suffixes in the exclude list that don't match any transactions in the
+    // mempool are ignored.
     rpc GetMempoolTx(GetMempoolTxRequest) returns (stream CompactTx) {}
 
     // Return a stream of current Mempool transactions. This will keep the output stream open while

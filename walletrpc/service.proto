@@ -112,6 +112,7 @@ message LightdInfo {
     string donationAddress = 15;        // Zcash donation UA address
     string upgradeName = 16;            // name of next pending network upgrade, empty if none scheduled
     uint64 upgradeHeight = 17;          // height of next pending upgrade, zero if none is scheduled
+    string lightwalletProtocolVersion = 18; // version of https://github.com/zcash/lightwallet-protocol served by this server
 }
 
 // TransparentAddressBlockFilter restricts the results of the GRPC methods that

@@ -25,32 +25,32 @@ We assume YourProject is a git repository. Begin with a clean working tree.
 (Pulling in lightwallet-protocol creates its own commit;
 any changes you're making to your project should be in separate commits.)
 
-````
+You can install the `tree` command using your OS package manager of choice (although is not necessary).
+```
 $ cd YourProject
-
 $ git subtree -p lightwallet-protocol/ pull git@github.com:zcash/lightwallet-protocol.git v0.4.0 --squash
-
 $ tree .
-
 ├── lightwallet-protocol
 │   ├── LICENSE
 │   └── walletrpc
 │       ├── compact_formats.proto
 │       └── service.proto
 ... (other directories)
-````
+```
 
-## Current  implementations
+## Current implementations
 ### Servers
 - [Lightwalletd (Go)](https://github.com/zcash/lightwalletd/) 
-- [Zaino (RustLang)](https://github.com/zingolabs/zaino)
+- [Zaino (Rust)](https://github.com/zingolabs/zaino)
 
 ### Clients
-- Zashi [[iOS](https://github.com/Electric-Coin-Company/zcash-swift-wallet-sdk/) | [Android](https://github.com/Electric-Coin-Company/zcash-android-wallet-sdk/)]
-- [Zingo Lib CLI](https://github.com/zingolabs/zingolib/)
-- [Zcash dev-tool](https://github.com/zcash/zcash-devtool) 
-- [Ywallet](https://github.com/hhanh00/zwallet)
-
+#### CLI and Dev Tooling
+- [Zingo Lib CLI (Rust)](https://github.com/zingolabs/zingolib/)
+- [Zcash dev-tool (Rust)](https://github.com/zcash/zcash-devtool)
+- [zcash_client_backend Rust create](https://docs.rs/zcash_client_backend/latest/zcash_client_backend/)
+#### Light Wallets
+- Zashi [[iOS](https://github.com/Electric-Coin-Company/zcash-swift-wallet-sdk/) | [Android](https://github.com/Electric-Coin-Company/zcash-android-wallet-sdk/)] 
+- [Ywallet (Dart/Flutter)](https://github.com/hhanh00/zwallet)
 
 ## Discussing and developing the Zcash Light Client Protocol
 

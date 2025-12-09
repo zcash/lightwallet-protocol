@@ -3,7 +3,7 @@
 This repository contains the canonical Protobuf definitions for the Zcash Light Wallet protocol.
 
 ## Rationale
-Before the creation of this repository, copies of wallet RPCs `.proto` files would exist in several
+Before the creation of this repository, copies of wallet RPC `.proto` files existed in several
 repositories across the Zcash ecosystem. This posed a challenge for protocol developers,
 wallet maintainers, and infrastructure providers who would have to look up the _Ad Hoc_
 canonical files for their own use and changes were hard to propagate and communicate.

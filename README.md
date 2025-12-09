@@ -14,11 +14,10 @@ Protocol is described in [ZIP-307](https://zips.z.cash/zip-0307).
 These files define the GRPC API for the ZIP 307 light wallet service using [proto 3](https://protobuf.dev/programming-guides/proto3/).
 
 ## How to use these files
-
-We recommend using `git subtree` to update downstream repositories to use the lastest tagged versions of this repository.
+We recommend using `git subtree` to update downstream repositories to use the lastest tagged versions
+of this repository.
 
 ```git subtree -p $(TARGET_PATH) pull git@github.com:zcash/lightwallet-protocol.git $(LATEST_VERSION) --squash```
-
 
 ### Example: YourProject
 We assume YourProject is a git repository. Begin with a clean working tree.
@@ -37,12 +36,10 @@ $ tree .
 │       └── service.proto
 ... (other directories)
 ```
-
 ## Current implementations
 ### Servers
 - [Lightwalletd (Go)](https://github.com/zcash/lightwalletd/) 
 - [Zaino (Rust)](https://github.com/zingolabs/zaino)
-
 ### Clients
 #### CLI and Dev Tooling
 - [Zingo Lib CLI (Rust)](https://github.com/zingolabs/zingolib/)
@@ -53,10 +50,8 @@ $ tree .
 - [Ywallet (Dart/Flutter)](https://github.com/hhanh00/zwallet)
 
 ## Discussing and developing the Zcash Light Client Protocol
-
 Light client protocol development is steered by the [Light Client Working Group](https://github.com/zcash/lcwg).
 
 This workgroup meets bi-weekly and is invite-only, but you can reach out through
 [this channel](https://discord.com/channels/809218587167293450/809250822579028008)
 of the Zcash R&D Discord server.
-

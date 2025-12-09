@@ -8,7 +8,7 @@ repositories across the Zcash ecosystem. This posed a challenge for protocol dev
 wallet maintainers, and infrastructure providers who would have to look up the _Ad Hoc_
 canonical files for their own use and changes were hard to propagate and communicate.
 
-This repository IS NOT a specification of the Zcash Light Client protocol. The Zcash Light Client
+This repository IS _not_ a specification of the Zcash Light Client protocol. The Zcash Light Client
 Protocol is described in [ZIP-307](https://zips.z.cash/zip-0307).
 
 These files are the Protocol Buffers used in that ZIP using [proto 3](https://protobuf.dev/programming-guides/proto3/).

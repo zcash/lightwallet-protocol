@@ -44,7 +44,7 @@ $ tree .
 #### CLI and Dev Tooling
 - [Zingo Lib CLI (Rust)](https://github.com/zingolabs/zingolib/)
 - [Zcash dev-tool (Rust)](https://github.com/zcash/zcash-devtool)
-- [zcash_client_backend Rust create](https://docs.rs/zcash_client_backend/latest/zcash_client_backend/)
+- [zcash_client_backend Rust crate](https://docs.rs/zcash_client_backend/latest/zcash_client_backend/)
 #### Light Wallets
 - Zashi [[iOS](https://github.com/Electric-Coin-Company/zcash-swift-wallet-sdk/) | [Android](https://github.com/Electric-Coin-Company/zcash-android-wallet-sdk/)] 
 - [Ywallet (Dart/Flutter)](https://github.com/hhanh00/zwallet)

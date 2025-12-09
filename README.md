@@ -11,22 +11,24 @@ canonical files for their own use and changes were hard to propagate and communi
 This repository IS _not_ a specification of the Zcash Light Client protocol. The Zcash Light Client
 Protocol is described in [ZIP-307](https://zips.z.cash/zip-0307).
 
-These files are the Protocol Buffers used in that ZIP using [proto 3](https://protobuf.dev/programming-guides/proto3/).
+These files define the GRPC API for the ZIP 307 light wallet service using [proto 3](https://protobuf.dev/programming-guides/proto3/).
 
 ## How to use these files
 
-We recommend using `git subtree` of the `main` branch  or tagged versions of this repository.
+We recommend using `git subtree` to update downstream repositories to use the lastest tagged versions of this repository.
 
-```git subtree -p lightwallet-protocol/ pull git@github.com:zcash/lightwallet-protocol.git main --squash```
+```git subtree -p $(TARGET_PATH) pull git@github.com:zcash/lightwallet-protocol.git $(LATEST_VERSION) --squash```
 
 
 ### Example: YourProject
-We assume YourProject is a git repository
+We assume YourProject is a git repository. Begin with a clean working tree.
+(Pulling in lightwallet-protocol creates its own commit;
+any changes you're making to your project should be in separate commits.)
 
 ````
 $ cd YourProject
 
-$ git subtree -p lightwallet-protocol/ pull git@github.com:zcash/lightwallet-protocol.git main --squash
+$ git subtree -p lightwallet-protocol/ pull git@github.com:zcash/lightwallet-protocol.git v0.4.0 --squash
 
 $ tree .
 
@@ -40,8 +42,9 @@ $ tree .
 
 ## Current  implementations
 ### Servers
-- [Lightwalletd (Go Lang)](https://github.com/zcash/lightwalletd/) 
+- [Lightwalletd (Go)](https://github.com/zcash/lightwalletd/) 
 - [Zaino (RustLang)](https://github.com/zingolabs/zaino)
+
 ### Clients
 - Zashi [[iOS](https://github.com/Electric-Coin-Company/zcash-swift-wallet-sdk/) | [Android](https://github.com/Electric-Coin-Company/zcash-android-wallet-sdk/)]
 - [Zingo Lib CLI](https://github.com/zingolabs/zingolib/)
@@ -53,6 +56,7 @@ $ tree .
 
 Light client protocol development is steered by the [Light Client Working Group](https://github.com/zcash/lcwg).
 
-This workgroup meets bi-weekly and its invite-only but you can reach out through the [this channel](https://discord.com/channels/809218587167293450/809250822579028008)
+This workgroup meets bi-weekly and is invite-only, but you can reach out through
+[this channel](https://discord.com/channels/809218587167293450/809250822579028008)
 of the Zcash R&D Discord server.
 

@@ -1,6 +1,6 @@
 # Light Wallet Protocol Canonical files
 
-This repository contains the canonical Protobuf definitionss of the Light Wallet protocol.
+This repository contains the canonical Protobuf definitions for the Zcash Light Wallet protocol.
 
 ## Rationale
 Before the creation of this repository, copies of wallet RPCs `.proto` files would exist in several

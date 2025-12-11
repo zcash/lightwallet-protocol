@@ -19,7 +19,7 @@ These files define the GRPC API for the ZIP 307 light wallet service using [prot
 We recommend using `git subtree` to update downstream repositories to use the lastest tagged versions
 of this repository.
 
-```git subtree -p $(TARGET_PATH) pull git@github.com:zcash/lightwallet-protocol.git $(LATEST_VERSION) --squash```
+```git subtree --prefix=$(TARGET_PATH) pull git@github.com:zcash/lightwallet-protocol.git $(LATEST_VERSION) --squash```
 
 ### Example: YourProject
 We assume YourProject is a git repository. Begin with a clean working tree.
@@ -29,7 +29,7 @@ any changes you're making to your project should be in separate commits.)
 You can install the `tree` command using your OS package manager of choice (although is not necessary).
 ```
 $ cd YourProject
-$ git subtree -p lightwallet-protocol/ pull git@github.com:zcash/lightwallet-protocol.git v0.4.0 --squash
+$ git subtree --prefix=lightwallet-protocol/ pull git@github.com:zcash/lightwallet-protocol.git v0.4.0 --squash
 $ tree .
 ├── lightwallet-protocol
 │   ├── LICENSE

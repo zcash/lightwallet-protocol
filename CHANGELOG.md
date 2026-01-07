@@ -7,6 +7,11 @@ and this library adheres to Rust's notion of
 
 ## Unreleased
 
+### Added
+- `service.BlockID` has added field `fullHeader` to indicate whether the four `GetBlock`
+  gRPCs should fill in the `header` field of the `compact_formats.CompactBlock`
+  message.
+
 ## [v0.4.0] - 2025-12-03
 
 ### Added

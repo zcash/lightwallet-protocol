@@ -18,16 +18,11 @@ enum PoolType {
 
 // A BlockID message contains identifiers to select a block: a height or a
 // hash. Support for specification by hash is not mandatory. (If `hash` is
-// non-empty, the rpc may return an error.)
-//
-// If `fullHeader` is set, returned compact blocks will contain the full header
-// (i.e., `header` will be present, that is, non-empty); otherwise, `header`
-// will be empty, and `hash`, `prevHash`, and `time` will be present.
-// See `compact_formats.proto:CompactBlock`
+// non-empty, the rpc may return an error.) This field is present to support
+// a possible future upgrade.
 message BlockID {
     uint64 height = 1;
     bytes hash = 2;
-    bool fullHeader = 3;
 }
 
 // BlockRange specifies a series of blocks from start to end inclusive.

@@ -230,7 +230,9 @@ service CompactTxStreamer {
     //
     // Note: this method is deprecated. Implementations should ignore any
     // `PoolType::TRANSPARENT` member of the `poolTypes` argument.
-    rpc GetBlockNullifiers(BlockID) returns (CompactBlock) {}
+    rpc GetBlockNullifiers(BlockID) returns (CompactBlock) {
+      option deprecated = true;
+    }
 
     // Return a list of consecutive compact blocks in the specified range,
     // which is inclusive of `range.end`.
@@ -244,7 +246,9 @@ service CompactTxStreamer {
     //
     // Note: this method is deprecated. Implementations should ignore any
     // `PoolType::TRANSPARENT` member of the `poolTypes` argument.
-    rpc GetBlockRangeNullifiers(BlockRange) returns (stream CompactBlock) {}
+    rpc GetBlockRangeNullifiers(BlockRange) returns (stream CompactBlock) {
+      option deprecated = true;
+    }
 
     // Return the requested full (not compact) transaction (as from zcashd)
     rpc GetTransaction(TxFilter) returns (RawTransaction) {}

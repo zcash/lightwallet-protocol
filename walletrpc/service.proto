@@ -222,14 +222,27 @@ service CompactTxStreamer {
     // Return the BlockID of the block at the tip of the best chain
     rpc GetLatestBlock(ChainSpec) returns (BlockID) {}
 
-    // Return the compact block corresponding to the given block identifier
+    // Return the compact block corresponding to the given block identifier.
+    //
+    // The returned `CompactBlock` includes transaction data for all value
+    // pools, including transparent inputs (`vin`) and outputs (`vout`). This
+    // differs from `GetBlockRange`, which supports filtering by pool type and
+    // defaults to returning only shielded (Sapling and Orchard) data. Clients
+    // that require only data for specific pools should use `GetBlockRange`
+    // with the appropriate `poolTypes` set.
+    //
+    // Note: the single null-outpoint input for coinbase transactions is
+    // omitted from the `vin` field of the corresponding `CompactTx`. See the
+    // documentation of the `CompactTx` message for details.
     rpc GetBlock(BlockID) returns (CompactBlock) {}
 
-    // Same as GetBlock except the returned CompactBlock value contains only
-    // nullifiers.
+    // Return a compact block containing only nullifier information for the
+    // shielded pools (Sapling spend nullifiers and Orchard action nullifiers).
+    // Transparent transaction data, Sapling outputs, full Orchard action data,
+    // and commitment tree sizes are not included.
     //
-    // Note: this method is deprecated. Implementations should ignore any
-    // `PoolType::TRANSPARENT` member of the `poolTypes` argument.
+    // Note: this method is deprecated; use `GetBlockRange` with the
+    // appropriate `poolTypes` instead.
     rpc GetBlockNullifiers(BlockID) returns (CompactBlock) {
       option deprecated = true;
     }
@@ -241,11 +254,15 @@ service CompactTxStreamer {
     // otherwise blocks are returned in decreasing height order.
     rpc GetBlockRange(BlockRange) returns (stream CompactBlock) {}
 
-    // Same as GetBlockRange except the returned CompactBlock values contain
-    // only nullifiers.
+    // Return a stream of compact blocks for the specified range, where each
+    // block contains only nullifier information for the shielded pools
+    // (Sapling spend nullifiers and Orchard action nullifiers). Transparent
+    // transaction data, Sapling outputs, full Orchard action data, and
+    // commitment tree sizes are not included. Implementations MUST ignore any
+    // `PoolType::TRANSPARENT` member of the `poolTypes` field of the request.
     //
-    // Note: this method is deprecated. Implementations should ignore any
-    // `PoolType::TRANSPARENT` member of the `poolTypes` argument.
+    // Note: this method is deprecated; use `GetBlockRange` with the
+    // appropriate `poolTypes` instead.
     rpc GetBlockRangeNullifiers(BlockRange) returns (stream CompactBlock) {
       option deprecated = true;
     }

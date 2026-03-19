@@ -7,6 +7,17 @@ and this library adheres to Rust's notion of
 
 ## Unreleased
 
+### Added
+- `service.MMRNode`
+- `service.BlockProof`
+- `service.ChainProof`
+- `service.CompactTxStreamer.GetChainProof`: returns a FlyClient chain proof
+  for the current best chain, enabling light clients to probabilistically
+  verify chain validity without trusting the server. The proof includes the
+  full tip block header (for Equihash/PoW verification), the MMR root
+  committed in that header, the auth data root (ZIP-244), and MMR inclusion
+  proofs for a set of sampled blocks. See ZIP-221 and ZIP-307.
+
 ## [v0.4.0] - 2025-12-03
 
 ### Added

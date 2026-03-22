@@ -7,6 +7,21 @@ and this library adheres to Rust's notion of
 
 ## Unreleased
 
+### Added
+- `service.MMRNode`
+- `service.BlockInclusionProof`
+- `service.BlockInclusionProof.tip_height`: height of the block whose header
+  commits to `mmr_root` and `auth_data_root`. The client should fetch this
+  block's header (via `GetBlock`) and verify `hashBlockCommitments` against it.
+- `service.CompactTxStreamer.GetBlockInclusionProof`: returns an MMR inclusion
+  proof for a specific block (ZIP-221), enabling light clients to verify that
+  a block is included in the committed chain history. The proof includes the
+  MMR root, auth data root (ZIP-244), the MMR leaf entry for the requested
+  block, sibling nodes along the Merkle path from leaf to root, and the
+  `tip_height` identifying the committing block. For FlyClient verification
+  (ZIP-307), the client selects blocks to challenge using the sampling
+  distribution from https://eprint.iacr.org/2019/226.
+
 ## [v0.4.0] - 2025-12-03
 
 ### Added

@@ -22,6 +22,16 @@ and this library adheres to Rust's notion of
   (ZIP-307), the client selects blocks to challenge using the sampling
   distribution from https://eprint.iacr.org/2019/226.
 
+## [v0.4.1] - 2026-02-20
+
+### Added
+- `README.md`
+
+### Changed
+- Designate `GetBlockNullifiers` and `GetBlockRangeNullifiers` as deprecated
+- Document `GetBlock` transparent data behavior
+- Clarify documentation of `GetBlockNullifiers` and `GetBlockRangeNullifiers`
+
 ## [v0.4.0] - 2025-12-03
 
 ### Added

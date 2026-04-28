@@ -58,7 +58,10 @@ jobs:
           echo "tag=$LATEST_TAG" >> "$GITHUB_OUTPUT"
       - name: Breaking-change check vs latest release tag
         if: steps.baseline.outputs.tag != ''
-        run: buf breaking --against ".git#tag=${{ steps.baseline.outputs.tag }}"
+        # subdir=walletrpc treats walletrpc/ as the module root in the baseline,
+        # which is necessary for tags older than the introduction of buf.yaml
+        # (it lets buf resolve `import "compact_formats.proto"` correctly).
+        run: buf breaking --against ".git#tag=${{ steps.baseline.outputs.tag }},subdir=walletrpc"
 
   codegen-go:
     name: codegen (Go)

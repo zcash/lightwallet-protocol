@@ -1,0 +1,14 @@
+version: v2
+modules:
+  - path: walletrpc
+lint:
+  use:
+    - BASIC
+  except:
+    # walletrpc/ does not match the proto package path cash/z/wallet/sdk/rpc/.
+    # Renaming the directory would break downstream consumers that vendor this
+    # repo via `git subtree --prefix=lightwallet-protocol/`.
+    - PACKAGE_DIRECTORY_MATCH
+breaking:
+  use:
+    - WIRE_JSON

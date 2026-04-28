@@ -7,6 +7,11 @@ and this library adheres to Rust's notion of
 
 ## Unreleased
 
+### Removed
+- `compact_formats.CompactBlock.protoVersion` has been removed. The field
+  number `1` and name `protoVersion` are now reserved. See
+  [#25](https://github.com/zcash/lightwallet-protocol/issues/25).
+
 ## [v0.4.1] - 2026-02-20
 
 ### Added

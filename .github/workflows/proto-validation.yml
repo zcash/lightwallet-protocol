@@ -22,12 +22,12 @@ env:
   GO_VERSION: '1.23.4'
   PROTOC_GEN_GO_VERSION: v1.36.4
   PROTOC_GEN_GO_GRPC_VERSION: v1.5.1
-  RUST_TOOLCHAIN: '1.83.0'
+  RUST_TOOLCHAIN: '1.85.0'
   TONIC_BUILD_VERSION: '0.12.3'
   PYTHON_VERSION: '3.12'
   GRPCIO_TOOLS_VERSION: '1.68.1'
   JAVA_VERSION: '21'
-  PROTOC_GEN_GRPC_KOTLIN_VERSION: '1.4.1'
+  PROTOC_GEN_GRPC_KOTLIN_VERSION: '1.4.3'
   SWIFT_PROTOBUF_VERSION: '1.28.2'
   GRPC_SWIFT_VERSION: '1.24.1'
 
@@ -148,7 +148,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-          cache: pip
       - name: Install grpcio-tools
         run: pip install "grpcio-tools==${{ env.GRPCIO_TOOLS_VERSION }}"
       - name: Generate
@@ -183,8 +182,13 @@ jobs:
       - name: Download protoc-gen-grpc-kotlin
         run: |
           V="${{ env.PROTOC_GEN_GRPC_KOTLIN_VERSION }}"
-          URL="https://repo1.maven.org/maven2/io/grpc/protoc-gen-grpc-kotlin/${V}/protoc-gen-grpc-kotlin-${V}-jdk8.sh"
-          curl -fsSL "$URL" -o /tmp/protoc-gen-grpc-kotlin
+          URL="https://repo1.maven.org/maven2/io/grpc/protoc-gen-grpc-kotlin/${V}/protoc-gen-grpc-kotlin-${V}-jdk8.jar"
+          curl -fsSL "$URL" -o /tmp/protoc-gen-grpc-kotlin.jar
+          # Maven only ships the JAR; protoc needs an executable, so wrap it.
+          cat > /tmp/protoc-gen-grpc-kotlin <<'EOF'
+          #!/usr/bin/env bash
+          exec java -jar /tmp/protoc-gen-grpc-kotlin.jar "$@"
+          EOF
           chmod +x /tmp/protoc-gen-grpc-kotlin
       - name: Generate
         run: |

@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this library adheres to Rust's notion of
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [v0.6.0] - Unreleased
+## [v0.6.0] - 2026-10-19
 
 ### Added
 - `service.CompactTxStreamer` has added rpc `GetStandardFee`, returning the

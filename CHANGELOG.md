@@ -5,6 +5,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this library adheres to Rust's notion of
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+- Document paging for `GetAddressUtxos` and `GetAddressUtxosStream`. When
+  `maxEntries` is nonzero, a reply ends on a complete height, so a reply with
+  fewer than `maxEntries` entries no longer implies end of data. If the first
+  height in range holds more than `maxEntries` entries, servers return
+  `FAILED_PRECONDITION` with a `google.rpc.ErrorInfo` detail carrying the
+  height and the entry count. See
+  [#33](https://github.com/zcash/lightwallet-protocol/issues/33).
+
 ## [v0.6.0] - 2026-10-19
 
 ### Added

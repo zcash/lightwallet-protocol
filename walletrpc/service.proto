@@ -211,12 +211,54 @@ message SubtreeRoot {
     uint64 completingBlockHeight = 4;       // The height of the block that completed this subtree in the main chain.
 }
 
-// Results are sorted by height, which makes it easy to issue another
-// request that picks up from where the previous left off.
+// The request for `GetAddressUtxos` and `GetAddressUtxosStream`.
+//
+// Results are the unspent transparent outputs paid to any of `addresses` at
+// heights greater than or equal to `startHeight`, sorted by ascending height.
+// The order of entries within a single height is unspecified.
+//
+// Paging with `maxEntries`
+//
+// A height does not uniquely identify an output, so a page that ended partway
+// through a height could not be resumed: resuming at that height re-fetches
+// the same entries, and resuming at the next height skips the rest of it. To
+// keep every page resumable, when `maxEntries` is nonzero the server MUST end
+// the reply on a complete height:
+//
+// - If the reply would otherwise end partway through a height, the server
+//   omits every entry at that last height. The reply then holds fewer than
+//   `maxEntries` entries even though more exist. A reply with fewer than
+//   `maxEntries` entries therefore does NOT mean that there is no more data.
+//
+// - If the first height in the range holds more than `maxEntries` entries, no
+//   complete height fits in the page. The server MUST NOT return a partial
+//   height. It fails the call with status `FAILED_PRECONDITION` and attaches a
+//   `google.rpc.ErrorInfo` detail with:
+//     reason:   "MAX_ENTRIES_EXCEEDED_AT_HEIGHT"
+//     domain:   "cash.z.wallet.sdk.rpc"
+//     metadata: "height" -> the height that does not fit (decimal string)
+//               "count"  -> the number of matching entries at that height
+//                           (decimal string)
+//   The status message SHOULD repeat the height and count for clients that do
+//   not decode error details. The client may retry with `maxEntries` set to at
+//   least `count`, or stop. Retrying the same request will fail the same way.
+//   For `GetAddressUtxosStream`, no entries are sent before this error.
+//
+// To read the next page, the client sets `startHeight` to one more than the
+// height of the last entry it received. It has read everything when a reply
+// contains no entries. A server can detect a page boundary inside a height by
+// fetching `maxEntries + 1` entries and comparing the height of the extra
+// entry with the height of the last entry in the page.
+//
+// Servers that predate this rule may end a page partway through a height. A
+// client that has not established that the server follows this rule (for
+// example from `LightdInfo.lightwalletProtocolVersion`) must not assume it.
+//
+// When `maxEntries` is zero, there is no limit and none of the above applies.
 message GetAddressUtxosArg {
     repeated string addresses = 1;
     uint64 startHeight = 2;
-    uint32 maxEntries = 3; // zero means unlimited
+    uint32 maxEntries = 3; // zero means unlimited; see paging rules above
 }
 message GetAddressUtxosReply {
     string address = 6;
